@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Legacy Enterprises — Boutique M&A a AI-native Venture Studio</title>
+<meta name="description" content="Boutique M&A poradenství pro malé a střední podniky v ČR a AI-native venture studio pod jednou střechou. Pracujeme v pre-exit okně, kde vzniká skutečná hodnota." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0F;
+    --bg-2: #0E1014;
+    --surface: #14161D;
+    --surface-2: #1C1F28;
+    --border: rgba(244, 241, 234, 0.08);
+    --border-strong: rgba(244, 241, 234, 0.16);
+    --text: #F4F1EA;
+    --text-muted: #8C8B86;
+    --text-dim: #5C5B57;
+    --copper: #C8A86B;
+    --copper-light: #E5C896;
+    --copper-deep: #8E7449;
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    --maxw: 1240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    font-weight: 300; line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(200, 168, 107, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 110%, rgba(200, 168, 107, 0.04), transparent 60%);
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: 0.025;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; position: relative; z-index: 3; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
+  h1 { font-size: clamp(48px, 7vw, 96px); }
+  h2 { font-size: clamp(36px, 4.5vw, 64px); }
+  h3 { font-size: clamp(24px, 2.6vw, 36px); }
+  h4 { font-size: 20px; font-weight: 500; }
+  p { color: var(--text-muted); font-size: 16px; max-width: 60ch; }
+  .lead { font-size: 20px; line-height: 1.55; color: var(--text); font-weight: 300; max-width: 62ch; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; color: var(--copper);
+    text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--copper); }
+  .serif-italic { font-style: italic; color: var(--copper-light); }
+  .copper { color: var(--copper); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px;
+    border-radius: 0; font-family: var(--sans); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+    border: 1px solid transparent; text-decoration: none; transition: all 0.3s ease;
+  }
+  .btn-primary { background: var(--copper); color: var(--bg); border-color: var(--copper); }
+  .btn-primary:hover { background: var(--copper-light); border-color: var(--copper-light); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+  .btn-ghost:hover { border-color: var(--copper); color: var(--copper); }
+  .btn .arrow { transition: transform 0.3s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  nav.topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 22px 0;
+    backdrop-filter: blur(20px); background: rgba(10, 11, 15, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; font-weight: 500;
+    text-decoration: none; color: var(--text); display: inline-flex; align-items: baseline; gap: 8px;
+  }
+  .logo .mark { color: var(--copper); font-style: italic; font-weight: 400; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none; font-size: 13px;
+    font-weight: 400; letter-spacing: 0.05em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--copper); }
+  .nav-cta {
+    font-family: var(--mono); font-size: 12px; color: var(--copper); text-decoration: none;
+    padding: 10px 18px; border: 1px solid var(--copper); transition: all 0.2s; letter-spacing: 0.06em;
+  }
+  .nav-cta:hover { background: var(--copper); color: var(--bg); }
+  section.hero { padding: 200px 0 140px; position: relative; border-bottom: 1px solid var(--border); }
+  .hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: end; }
+  .hero h1 { margin-top: 28px; margin-bottom: 36px; }
+  .hero h1 .em { font-style: italic; color: var(--copper); font-weight: 400; }
+  .hero-actions { display: flex; gap: 16px; margin-top: 44px; }
+  .hero-side { border-left: 1px solid var(--border); padding-left: 32px; padding-bottom: 8px; }
+  .hero-side .label {
+    font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+    letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .hero-side .stat { font-family: var(--serif); font-size: 56px; line-height: 1; color: var(--copper); font-weight: 400; }
+  .hero-side .stat-label { color: var(--text-muted); font-size: 13px; margin-top: 12px; line-height: 1.5; }
+  .hero-side .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  .strip { border-bottom: 1px solid var(--border); padding: 28px 0; overflow: hidden; }
+  .strip-inner {
+    display: flex; gap: 80px; align-items: center; color: var(--text-dim);
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; flex-wrap: wrap;
+  }
+  .strip-inner span.bullet { color: var(--copper); }
+  section.thesis { padding: 140px 0; border-bottom: 1px solid var(--border); }
+  .thesis-head { max-width: 760px; margin-bottom: 80px; }
+  .thesis-head h2 { margin-top: 24px; }
+  .thesis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); }
+  .thesis-card { padding: 56px 40px 56px 0; border-right: 1px solid var(--border); }
+  .thesis-card:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+  .thesis-card:nth-child(2) { padding-left: 40px; }
+  .thesis-card .num {
+    font-family: var(--mono); font-size: 12px; color: var(--copper);
+    letter-spacing: 0.2em; margin-bottom: 32px; display: block;
+  }
+  .thesis-card h3 { margin-bottom: 20px; font-style: italic; font-weight: 400; }
+  section.division { padding: 140px 0; border-bottom: 1px solid var(--border); position: relative; }
+  .division-head {
+    display: grid; grid-template-columns: 200px 1fr; gap: 60px;
+    margin-bottom: 80px; align-items: start;
+  }
+  .division-num {
+    font-family: var(--serif); font-size: 120px; line-height: 0.9;
+    color: transparent; -webkit-text-stroke: 1px var(--copper); font-weight: 400;
+  }
+  .division-title { margin-top: 24px; }
+  .division-title .label {
+    font-family: var(--mono); font-size: 11px; color: var(--copper);
+    letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .division-title h2 { margin: 20px 0 28px; }
+  .pipeline { margin: 60px 0; background: var(--surface); border: 1px solid var(--border); padding: 48px 40px; }
+  .pipeline-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+  }
+  .pipeline-head h4 { font-family: var(--serif); font-size: 24px; }
+  .pipeline-head .badge {
+    font-family: var(--mono); font-size: 11px; color: var(--copper);
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .phases { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; position: relative; }
+  .phase { padding: 0 16px; border-right: 1px solid var(--border); text-align: left; position: relative; }
+  .phase:first-child { padding-left: 0; }
+  .phase:last-child { border-right: none; padding-right: 0; }
+  .phase .step {
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.2em; margin-bottom: 16px;
+  }
+  .phase .ph-name {
+    font-family: var(--serif); font-size: 19px; font-weight: 500;
+    color: var(--text); margin-bottom: 12px; line-height: 1.2;
+  }
+  .phase .ph-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .phase.active {
+    background: linear-gradient(180deg, rgba(200, 168, 107, 0.08), transparent);
+    border-top: 2px solid var(--copper); padding-top: 16px; margin-top: -16px;
+  }
+  .phase.active .step { color: var(--copper); }
+  .phase.active .ph-name { color: var(--copper-light); }
+  .pipeline-foot {
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.15em; display: flex; justify-content: space-between;
+  }
+  .pipeline-foot .accent { color: var(--copper); }
+  .div-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 80px; }
+  .div-col h4 {
+    font-family: var(--mono); font-size: 12px; color: var(--copper);
+    letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 32px; font-weight: 500;
+  }
+  .audience-list { list-style: none; }
+  .audience-list li {
+    padding: 28px 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px; align-items: start;
+  }
+  .audience-list li:last-child { border-bottom: none; }
+  .audience-list .ic {
+    font-family: var(--serif); font-size: 28px; color: var(--copper);
+    font-style: italic; line-height: 1;
+  }
+  .audience-list .name {
+    font-family: var(--serif); font-size: 22px; color: var(--text);
+    margin-bottom: 8px; font-weight: 500;
+  }
+  .audience-list .desc { color: var(--text-muted); font-size: 14px; line-height: 1.55; }
+  .service-list { list-style: none; }
+  .service-list li {
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  }
+  .service-list li:last-child { border-bottom: none; }
+  .service-list .svc { font-family: var(--serif); font-size: 19px; color: var(--text); }
+  .service-list .svc-num {
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.2em;
+  }
+  .portfolio { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
+  .startup-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 48px 40px; position: relative; transition: all 0.4s ease; overflow: hidden;
+  }
+  .startup-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--copper), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .startup-card:hover::before { opacity: 1; }
+  .startup-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .startup-card .meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+  }
+  .startup-card .stage {
+    font-family: var(--mono); font-size: 10px; color: var(--copper);
+    letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .startup-card .year {
+    font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.2em;
+  }
+  .startup-card .name {
+    font-family: var(--serif); font-size: 56px; line-height: 1; color: var(--text);
+    margin-bottom: 24px; font-weight: 400; letter-spacing: -0.02em;
+  }
+  .startup-card .tagline {
+    color: var(--copper-light); font-family: var(--serif); font-style: italic;
+    font-size: 22px; margin-bottom: 28px; line-height: 1.3;
+  }
+  .startup-card .desc {
+    color: var(--text-muted); font-size: 14px; line-height: 1.65; margin-bottom: 36px;
+  }
+  .startup-card .tags {
+    display: flex; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 24px;
+  }
+  .startup-card .tag {
+    font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+    border: 1px solid var(--border); padding: 6px 12px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  section.ai-ops {
+    padding: 160px 0; border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+  }
+  .ai-head { text-align: center; margin-bottom: 100px; }
+  .ai-head .eyebrow { margin-bottom: 32px; }
+  .ai-head .eyebrow::before { display: none; }
+  .ai-head h2 { max-width: 18ch; margin: 0 auto 28px; }
+  .ai-head p { max-width: 60ch; margin: 0 auto; color: var(--text); font-size: 18px; }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .stat-cell { padding: 56px 32px; border-right: 1px solid var(--border); position: relative; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .big {
+    font-family: var(--serif); font-size: 88px; line-height: 1; color: var(--copper);
+    font-weight: 400; letter-spacing: -0.03em; margin-bottom: 20px;
+  }
+  .stat-cell .big .unit {
+    font-size: 36px; color: var(--copper-deep); vertical-align: top; margin-left: 4px;
+  }
+  .stat-cell .desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; max-width: 24ch; }
+  .stat-cell .label {
+    font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+    letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 20px;
+  }
+  section.team { padding: 140px 0; border-bottom: 1px solid var(--border); }
+  .team-head {
+    margin-bottom: 80px; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: end;
+  }
+  .team-head h2 { max-width: 14ch; }
+  .team-head p { font-size: 16px; line-height: 1.7; }
+  .founders { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .founder {
+    border: 1px solid var(--border); padding: 48px 40px; background: var(--surface);
+    display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: start;
+  }
+  .founder .avatar {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--copper-deep), var(--copper));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 36px; color: var(--bg);
+    font-weight: 500; position: relative;
+  }
+  .founder .avatar::after {
+    content: ""; position: absolute; inset: -6px;
+    border: 1px solid var(--border); border-radius: 50%;
+  }
+  .founder .name {
+    font-family: var(--serif); font-size: 28px; color: var(--text);
+    margin-bottom: 6px; line-height: 1.1; letter-spacing: -0.01em;
+  }
+  .founder .role {
+    font-family: var(--mono); font-size: 11px; color: var(--copper);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .founder .bio { color: var(--text-muted); font-size: 14px; line-height: 1.65; margin-bottom: 28px; }
+  .founder .meta-list {
+    list-style: none; border-top: 1px solid var(--border); padding-top: 20px;
+  }
+  .founder .meta-list li {
+    display: flex; justify-content: space-between; padding: 8px 0; font-size: 12px;
+  }
+  .founder .meta-list .k {
+    font-family: var(--mono); color: var(--text-dim);
+    letter-spacing: 0.1em; text-transform: uppercase; font-size: 10px;
+  }
+  .founder .meta-list .v { color: var(--text); font-size: 12px; }
+  section.contact {
+    padding: 160px 0; border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  section.contact::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200, 168, 107, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; position: relative;
+  }
+  .contact-left h2 { margin: 24px 0 28px; max-width: 12ch; }
+  .contact-left h2 .em { font-style: italic; color: var(--copper); }
+  .process-steps { list-style: none; margin-top: 48px; }
+  .process-steps li {
+    padding: 24px 0; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 60px 1fr auto; gap: 24px; align-items: center;
+  }
+  .process-steps li:last-child { border-bottom: 1px solid var(--border); }
+  .process-steps .num {
+    font-family: var(--serif); font-size: 32px; color: var(--copper); font-style: italic;
+  }
+  .process-steps .ph { font-family: var(--serif); font-size: 22px; color: var(--text); }
+  .process-steps .dur {
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.15em;
+  }
+  .contact-card { background: var(--surface); border: 1px solid var(--border); padding: 56px 48px; }
+  .contact-card h3 { margin-bottom: 36px; font-style: italic; }
+  .contact-fields { list-style: none; }
+  .contact-fields li { padding: 24px 0; border-top: 1px solid var(--border); }
+  .contact-fields li:last-child { border-bottom: 1px solid var(--border); }
+  .contact-fields .lbl {
+    font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+    letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .contact-fields .val { font-family: var(--serif); font-size: 22px; color: var(--text); }
+  .contact-fields a { color: var(--copper-light); text-decoration: none; }
+  .contact-fields a:hover { color: var(--copper); }
+  .contact-cta { margin-top: 36px; width: 100%; justify-content: space-between; }
+  footer { padding: 80px 0 40px; }
+  .foot-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+    padding-bottom: 60px; border-bottom: 1px solid var(--border);
+  }
+  .foot-brand .logo { font-size: 28px; }
+  .foot-brand p {
+    margin-top: 20px; max-width: 36ch; color: var(--text-muted);
+    font-size: 13px; line-height: 1.6;
+  }
+  .foot-col h5 {
+    font-family: var(--mono); font-size: 10px; color: var(--copper);
+    letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 20px; font-weight: 500;
+  }
+  .foot-col ul { list-style: none; }
+  .foot-col li { padding: 6px 0; }
+  .foot-col a {
+    color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s;
+  }
+  .foot-col a:hover { color: var(--text); }
+  .foot-bot {
+    padding-top: 32px; display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em;
+  }
+  .foot-bot .legal { display: flex; gap: 24px; }
+  .foot-bot .legal a { color: var(--text-dim); text-decoration: none; }
+  .foot-bot .legal a:hover { color: var(--copper); }
+  .ornament {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin: 0 0 16px 0;
+  }
+  .ornament .line { width: 56px; height: 1px; background: var(--copper); opacity: 0.5; }
+  .ornament .dot { width: 6px; height: 6px; background: var(--copper); transform: rotate(45deg); }
+  @media (max-width: 900px) {
+    .hero-grid, .division-head, .div-grid, .portfolio, .stats-grid,
+    .team-head, .founders, .contact-grid, .foot-top, .thesis-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .phases { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+    section.hero { padding: 140px 0 80px; }
+    .division-num { font-size: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">Legacy<span class="mark">·</span>Enterprises</a>
+    <ul class="nav-links">
+      <li><a href="#thesis">Filosofie</a></li>
+      <li><a href="#ma">M&amp;A</a></li>
+      <li><a href="#vs">Venture Studio</a></li>
+      <li><a href="#team">Tým</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Domluvit rozhovor →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-main">
+      <span class="eyebrow">Boutique Holding · est. 2026</span>
+      <h1>
+        Hodnota vzniká tam,<br>
+        kde se ostatní <span class="em">nedívají</span>.
+      </h1>
+      <p class="lead">
+        Legacy Enterprises spojuje boutique M&amp;A poradenství pro malé a střední české podniky
+        s AI-native venture studiem. Pracujeme v pre-exit okně, kde brokeři ještě nepřišli
+        a kde se rozhoduje o většině budoucí hodnoty transakce.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Domluvit úvodní rozhovor <span class="arrow">→</span></a>
+        <a href="#thesis" class="btn btn-ghost">Naše investiční teze</a>
+      </div>
+    </div>
+
+    <aside class="hero-side">
+      <div class="label">Pre-exit okno</div>
+      <div class="stat">18–36</div>
+      <div class="stat-label">měsíců před transakcí, kde se rozhoduje o většině budoucího multiplikátoru</div>
+      <div class="divider"></div>
+      <div class="label">Operations</div>
+      <div class="stat">AI<span style="color: var(--copper-deep); font-size: 32px; vertical-align: super;">·first</span></div>
+      <div class="stat-label">2 zakladatelé + AI agenti. Žádní fixní zaměstnanci, žádné kanceláře.</div>
+    </aside>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span>Praha → ČR → EU</span>
+    <span class="bullet">◆</span>
+    <span>Business Brokerage</span>
+    <span class="bullet">◆</span>
+    <span>Venture Studio</span>
+    <span class="bullet">◆</span>
+    <span>AI Automation</span>
+    <span class="bullet">◆</span>
+    <span>Boring Business First</span>
+    <span class="bullet">◆</span>
+    <span>Founders &amp; Operators Only</span>
+  </div>
+</div>
+
+<section class="thesis" id="thesis">
+  <div class="wrap">
+    <div class="thesis-head">
+      <span class="eyebrow">Investiční teze</span>
+      <h2>Tři přesvědčení, kterým jsme ochotni věnovat příští dekádu.</h2>
+    </div>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <span class="num">01 — Strukturální mezera</span>
+        <h3>Pre-exit okno je nepokryté ne náhodou.</h3>
+        <p>Tradiční brokeři vstupují až ve fázi listingu — odměňováni za úspěšnou transakci, ne za přípravu. Vlastník zůstává sám s největším rozhodnutím svého života v období, kdy by ho potřeboval nejvíc.</p>
+      </div>
+      <div class="thesis-card">
+        <span class="num">02 — Boring business</span>
+        <h3>Nudné podniky jsou nejlepší byznys.</h3>
+        <p>HVAC, prádelny, autoservisy, gastronomie. Stabilní cash flow, předvídatelné multiplikátory, nízká cyklická volatilita. Tam, kde se ostatní nudí, se dělají reálné peníze — a vzniká reálná hodnota při exitu.</p>
+      </div>
+      <div class="thesis-card">
+        <span class="num">03 — AI jako tým</span>
+        <h3>Firma bez kanceláří a HR.</h3>
+        <p>Většina firem, které o sobě tvrdí, že jsou AI-first, používá AI jako nástroj. My ji používáme jako tým. Analytici, výzkumníci, asistenti — všechno agenti. Lidé jen tam, kde rozhoduje vztah, vyjednávání nebo důvěra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="division" id="ma">
+  <div class="wrap">
+    <div class="division-head">
+      <div class="division-num">01</div>
+      <div class="division-title">
+        <span class="label">Divize 01 · Business Brokerage</span>
+        <h2>Exit Readiness Program</h2>
+        <p class="lead">
+          Připravujeme stabilní české podniky — HVAC, prádelny, autoservisy, gastronomii —
+          na exit 18 až 36 měsíců dopředu. V okně, kde brokeři ještě nepřišli
+          a kde vlastník ještě nemá nikoho, s kým by mluvil. To není makléřství.
+          To je řízení připravenosti.
+        </p>
+      </div>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipeline-head">
+        <h4>Hodnotový řetězec M&amp;A transakce</h4>
+        <span class="badge">Naše pozice: fáze 01–02</span>
+      </div>
+      <div class="phases">
+        <div class="phase active">
+          <div class="step">01</div>
+          <div class="ph-name">Pre-exit audit</div>
+          <div class="ph-desc">Mapování slabin, závislostí na vlastníkovi, normalizace EBITDA.</div>
+        </div>
+        <div class="phase active">
+          <div class="step">02</div>
+          <div class="ph-name">Optimalizace</div>
+          <div class="ph-desc">18–36 měsíců zlepšování operations, marže a procesů.</div>
+        </div>
+        <div class="phase">
+          <div class="step">03</div>
+          <div class="ph-name">Valuace</div>
+          <div class="ph-desc">Multiple uplift, příprava data roomu, due diligence balíček.</div>
+        </div>
+        <div class="phase">
+          <div class="step">04</div>
+          <div class="ph-name">Listing</div>
+          <div class="ph-desc">Cílený outreach na ETA kupce a strategické nabyvatele.</div>
+        </div>
+        <div class="phase">
+          <div class="step">05</div>
+          <div class="ph-name">Vyjednávání</div>
+          <div class="ph-desc">Term sheet, LOI, ochrana vlastníka v negociaci.</div>
+        </div>
+        <div class="phase">
+          <div class="step">06</div>
+          <div class="ph-name">Uzavření</div>
+          <div class="ph-desc">Předání, transakce a post-closing kontinuita.</div>
+        </div>
+      </div>
+      <div class="pipeline-foot">
+        <span>↳ Brokeři standardně začínají od fáze <span class="accent">04</span>.</span>
+        <span>Hodnota se ale generuje ve fázích <span class="accent">01–02</span>.</span>
+      </div>
+    </div>
+
+    <div class="div-grid">
+      <div class="div-col">
+        <h4>Pro koho pracujeme</h4>
+        <ul class="audience-list">
+          <li>
+            <span class="ic">A</span>
+            <div>
+              <div class="name">Vlastníci 55+ bez nástupce</div>
+              <div class="desc">Stabilní firma, žádný plán exitu, blížící se osobní rozhodnutí. Potřebují průvodce, který přijde dřív než broker — a zůstane déle.</div>
+            </div>
+          </li>
+          <li>
+            <span class="ic">B</span>
+            <div>
+              <div class="name">ETA kupci a search funds</div>
+              <div class="desc">Akviziční podnikatelé hledající ověřené, připravené příležitosti v ČR. Komunita, která dnes na českém trhu nemá kurátora.</div>
+            </div>
+          </li>
+          <li>
+            <span class="ic">C</span>
+            <div>
+              <div class="name">Rodinní nástupci s mandátem</div>
+              <div class="desc">Druhá generace, která přebírá řízení a potřebuje profesionalizaci firmy bez kulturního střetu se zakladatelem.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="div-col">
+        <h4>Co konkrétně děláme</h4>
+        <ul class="service-list">
+          <li><span class="svc">Pre-exit diagnostika</span><span class="svc-num">→ 01</span></li>
+          <li><span class="svc">Normalizace EBITDA a financí</span><span class="svc-num">→ 02</span></li>
+          <li><span class="svc">Operations optimization</span><span class="svc-num">→ 03</span></li>
+          <li><span class="svc">AI agenti a automatizace procesů</span><span class="svc-num">→ 04</span></li>
+          <li><span class="svc">Multiple uplift roadmapa</span><span class="svc-num">→ 05</span></li>
+          <li><span class="svc">Buyer matching a outreach</span><span class="svc-num">→ 06</span></li>
+          <li><span class="svc">Transakční dohled a closing</span><span class="svc-num">→ 07</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="division" id="vs">
+  <div class="wrap">
+    <div class="division-head">
+      <div class="division-num">02</div>
+      <div class="division-title">
+        <span class="label">Divize 02 · Venture Studio</span>
+        <h2>Stavíme AI-native byznysy od první linie kódu.</h2>
+        <p class="lead">
+          Mix interních příležitostí a externích zakladatelů. Stejná logika jako v M&amp;A —
+          najít nepokrytou vrstvu trhu a obsadit ji dřív, než si jí všimne někdo jiný.
+          Z jedné kombinace strategie, kapitálu a kódu staví produkt, který by sám zakladatel
+          nepostavil včas. A ten samý zakladatel zůstává operativním šéfem.
+        </p>
+      </div>
+    </div>
+
+    <div class="portfolio">
+      <article class="startup-card">
+        <div class="meta">
+          <span class="stage">Portfolio · v provozu</span>
+          <span class="year">2026 →</span>
+        </div>
+        <div class="name">Univerze</div>
+        <div class="tagline">Komunita pro studenty soukromých vysokých škol v ČR.</div>
+        <div class="desc">
+          Univerze propojuje studenty soukromých univerzit napříč obory: sdílení materiálů,
+          mentoring, podnikatelské příležitosti a první pracovní zkušenosti. Z dlouhodobého hlediska
+          se z platformy stává talent pipeline samotného venture studia — místo, kde najdeme
+          další zakladatele dřív, než je vidí kdokoli jiný.
+        </div>
+        <div class="tags">
+          <span class="tag">Community</span>
+          <span class="tag">EdTech</span>
+          <span class="tag">Talent Pipeline</span>
+          <span class="tag">B2C</span>
+        </div>
+      </article>
+
+      <article class="startup-card">
+        <div class="meta">
+          <span class="stage">Portfolio · v provozu</span>
+          <span class="year">2026 →</span>
+        </div>
+        <div class="name">Viets</div>
+        <div class="tagline">Mezigenerační most vietnamské podnikatelské komunity v ČR.</div>
+        <div class="desc">
+          Vietnamská diaspora v ČR drží tisíce stabilních rodinných podniků — a stojí
+          před stejným problémem nástupnictví jako zbytek SME trhu, jen s jazykovou
+          a kulturní bariérou navrch. Viets spojuje starší vlastníky s mladou generací
+          nástupců, pracovníků a partnerů. Sektorová varianta naší M&amp;A teze.
+        </div>
+        <div class="tags">
+          <span class="tag">Community</span>
+          <span class="tag">Marketplace</span>
+          <span class="tag">Succession</span>
+          <span class="tag">B2B + B2C</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="div-grid" style="margin-top: 100px;">
+      <div class="div-col">
+        <h4>Interní příležitosti</h4>
+        <p style="margin-bottom: 24px; line-height: 1.7;">
+          Nápady, které vznikají uvnitř holdingu — z dat M&amp;A divize, z trendů v boring business
+          segmentu, z technologických posunů. Studio drží majoritu, najímá operátora a financuje
+          první milestony z vlastních zdrojů.
+        </p>
+        <ul class="service-list">
+          <li><span class="svc">Validace tržní mezery</span><span class="svc-num">→ 02 týdny</span></li>
+          <li><span class="svc">MVP s AI agenty</span><span class="svc-num">→ 08 týdnů</span></li>
+          <li><span class="svc">Tržní spuštění</span><span class="svc-num">→ 12 týdnů</span></li>
+          <li><span class="svc">Operátor a růst</span><span class="svc-num">→ 6+ měsíců</span></li>
+        </ul>
+      </div>
+
+      <div class="div-col">
+        <h4>Externí zakladatelé</h4>
+        <p style="margin-bottom: 24px; line-height: 1.7;">
+          Pro zakladatele, kteří mají insight, ale chybí jim infrastruktura. Přinášejí
+          doménovou znalost a operativní vedení. Studio doplňuje strategii, technologii
+          a první zákazníky. Equity split podle vstupu, vždy s mandátem operátora pro zakladatele.
+        </p>
+        <ul class="service-list">
+          <li><span class="svc">Diskuse o idea fit</span><span class="svc-num">→ 01 týden</span></li>
+          <li><span class="svc">Společný term sheet</span><span class="svc-num">→ 02 týdny</span></li>
+          <li><span class="svc">Build &amp; launch fáze</span><span class="svc-num">→ 12 týdnů</span></li>
+          <li><span class="svc">Studio jako board partner</span><span class="svc-num">→ kontinuálně</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ai-ops">
+  <div class="wrap">
+    <div class="ai-head">
+      <div class="ornament">
+        <span class="line"></span>
+        <span class="dot"></span>
+        <span class="line"></span>
+      </div>
+      <span class="eyebrow" style="margin: 0;">AI Operations Model</span>
+      <h2>Náš tým nejsou lidé.<br><span class="serif-italic">Jsou to systémy.</span></h2>
+      <p>
+        Většina firem, které o sobě tvrdí, že jsou AI-first, používá AI jako nástroj.
+        My ji používáme jako tým. Výzkum, analýza, příprava materiálů, monitoring trhu, draftování smluv —
+        vše, co je proces, dělá agent. Lidé vstupují tam, kde rozhoduje vztah, vyjednávání a důvěra.
+      </p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="label">Automatizace</div>
+        <div class="big">~85<span class="unit">%</span></div>
+        <div class="desc">opakovaných úkolů obsluhováno AI agenty napříč oběma divizemi</div>
+      </div>
+      <div class="stat-cell">
+        <div class="label">Tým</div>
+        <div class="big">02<span class="unit"> os.</span></div>
+        <div class="desc">zakladatelů pokrývá obě divize. Žádní fixní zaměstnanci v roce 1.</div>
+      </div>
+      <div class="stat-cell">
+        <div class="label">Provoz</div>
+        <div class="big">0<span class="unit"> kanc.</span></div>
+        <div class="desc">remote-first model, sídlo v Praze pro klienty a partnerství</div>
+      </div>
+      <div class="stat-cell">
+        <div class="label">Nákladová struktura</div>
+        <div class="big">⅓<span class="unit"> ceny</span></div>
+        <div class="desc">tradičního butikového poradenství při srovnatelné hloubce analýzy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="team">
+  <div class="wrap">
+    <div class="team-head">
+      <div>
+        <span class="eyebrow">Zakladatelé</span>
+        <h2 style="margin-top: 24px;">Dvě role,<br><span class="serif-italic">jedna teze.</span></h2>
+      </div>
+      <p>
+        Legacy Enterprises stojí na dvou komplementárních profilech: zkušenost ve strategii,
+        obchodu a tržní evaluaci na jedné straně; technologická a AI infrastruktura na straně druhé.
+        Bez kompromisu mezi byznysem a kódem.
+      </p>
+    </div>
+
+    <div class="founders">
+      <article class="founder">
+        <div class="avatar">TN</div>
+        <div>
+          <div class="name">Thuc Tuan Nguyen</div>
+          <div class="role">CEO · M&amp;A · Strategie</div>
+          <div class="bio">
+            Sedm let praxe v obchodu, business developmentu, investicích a tržní evaluaci.
+            Studuje Bc. Podnikání a management na Panevropské univerzitě. Vede strategii
+            holdingu a M&amp;A divizi. Vietnamsko-český původ, primární trh ČR, výhledově EU.
+          </div>
+          <ul class="meta-list">
+            <li><span class="k">Praxe</span><span class="v">~7 let · obchod &amp; investice</span></li>
+            <li><span class="k">Jazyky</span><span class="v">CZ · EN · VN</span></li>
+            <li><span class="k">Podíl</span><span class="v">50 %</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="founder">
+        <div class="avatar">MK</div>
+        <div>
+          <div class="name">Matěj Klíma</div>
+          <div class="role">CTO · IT · AI Infrastruktura</div>
+          <div class="bio">
+            Architekt AI vrstvy holdingu. Zodpovídá za DevOps, datovou infrastrukturu
+            a agentní systémy, které tvoří provozní jádro obou divizí. Stejně tak za
+            technologii startupů Univerze a Viets — od první linie kódu po produkci.
+          </div>
+          <ul class="meta-list">
+            <li><span class="k">Specializace</span><span class="v">IT · DevOps · AI</span></li>
+            <li><span class="k">Role</span><span class="v">Build &amp; Run</span></li>
+            <li><span class="k">Podíl</span><span class="v">50 %</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-left">
+      <span class="eyebrow">Začínáme rozhovorem</span>
+      <h2>Nepotřebujete<br>broker.<br><span class="em">Potřebujete čas.</span></h2>
+      <p class="lead">
+        Většina vlastníků čeká s rozhodnutím o exitu příliš dlouho. Tři roky před transakcí
+        ovlivníte multiplikátor podstatně víc než tři týdny po listingu. Začneme tím,
+        že si v klidu projdeme, kde dnes vaše firma stojí.
+      </p>
+
+      <ol class="process-steps">
+        <li>
+          <span class="num">01</span>
+          <span class="ph">Úvodní rozhovor</span>
+          <span class="dur">~60 MIN · ZDARMA</span>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <span class="ph">Pre-feasibility audit</span>
+          <span class="dur">2–3 TÝDNY</span>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <span class="ph">Strategická roadmapa</span>
+          <span class="dur">12–36 MĚSÍCŮ</span>
+        </li>
+      </ol>
+    </div>
+
+    <aside class="contact-card">
+      <span class="eyebrow">Kontakt</span>
+      <h3 style="margin-top: 16px;">Domluvte si první rozhovor.</h3>
+      <ul class="contact-fields">
+        <li>
+          <div class="lbl">E-mail</div>
+          <div class="val"><a href="mailto:contact@legacyenterprises.cz">contact@legacyenterprises.cz</a></div>
+        </li>
+        <li>
+          <div class="lbl">Sídlo</div>
+          <div class="val">Praha · Česká republika</div>
+        </li>
+        <li>
+          <div class="lbl">Provoz</div>
+          <div class="val">Remote-first · CZ &amp; EU</div>
+        </li>
+        <li>
+          <div class="lbl">Odpověď</div>
+          <div class="val">Do 48 hodin</div>
+        </li>
+      </ul>
+      <a href="mailto:contact@legacyenterprises.cz" class="btn btn-primary contact-cta">
+        <span>Napsat zakladatelům</span> <span class="arrow">→</span>
+      </a>
+    </aside>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="logo">Legacy<span class="mark">·</span>Enterprises</a>
+        <p>
+          Boutique M&amp;A poradenství pro malé a střední české podniky
+          a AI-native venture studio pod jednou střechou. Praha, 2026.
+        </p>
+      </div>
+      <div class="foot-col">
+        <h5>Divize</h5>
+        <ul>
+          <li><a href="#ma">Business Brokerage</a></li>
+          <li><a href="#vs">Venture Studio</a></li>
+          <li><a href="#vs">AI Automation</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Portfolio</h5>
+        <ul>
+          <li><a href="#vs">Univerze</a></li>
+          <li><a href="#vs">Viets</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Spojení</h5>
+        <ul>
+          <li><a href="#contact">Úvodní rozhovor</a></li>
+          <li><a href="mailto:contact@legacyenterprises.cz">E-mail</a></li>
+          <li><a href="#team">Tým</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <div>© 2026 Legacy Enterprises s.r.o. · IČO ____ · Praha</div>
+      <div class="legal">
+        <a href="#">Zásady soukromí</a>
+        <a href="#">Cookies</a>
+        <a href="#">Etický kodex</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
